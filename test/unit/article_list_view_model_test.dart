@@ -7,6 +7,9 @@ import 'package:mockito/mockito.dart';
 import 'news_apis_test.mocks.dart';
 import 'test_data.dart';
 
+// * This testing file works completely fine, but could most likely get reduced in size via refactoring
+// * Task to be done late on
+
 void main() {
   group('ArticleListViewModel tests', () {
     group('testing getArticles function', () {

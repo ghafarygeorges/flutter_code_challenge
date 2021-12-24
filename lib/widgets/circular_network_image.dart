@@ -16,6 +16,10 @@ class CircularNetworkImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // * Cached network image caches images and handles placeholders and errors automatically using widgets
+    // * in this case, i used a circular loader when the image is loading and an error icon if it fails to load
+    // * This version is used for circular images
+    // * By default, it takes BoxFit.cover
     return ClipRRect(
       borderRadius: BorderRadius.circular(1000),
       child: CachedNetworkImage(

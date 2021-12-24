@@ -9,6 +9,7 @@ import 'package:mockito/mockito.dart';
 import 'news_apis_test.mocks.dart';
 import 'test_data.dart';
 
+// * This line generates mocks using the http Client
 @GenerateMocks([http.Client])
 void main() {
   group('newsApi getPopularArticles test', () {

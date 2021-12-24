@@ -1,3 +1,5 @@
+// * This file contains test data used to mock API calls
+
 Map<String, dynamic> normalWorkingResponse = {
   "results": [
     {

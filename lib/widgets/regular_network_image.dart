@@ -20,6 +20,10 @@ class RegularNetworkImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // * Cached network image caches images and handles placeholders and errors automatically using widgets
+    // * in this case, i used a circular loader when the image is loading and an error icon if it fails to load
+    // * This version can either be slightly curved on the edges or completely flat depending on the curved parameter
+    // * By default, it is flat and takes BoxFit.cover
     return ClipRRect(
       borderRadius: curved ? BorderRadius.circular(10) : BorderRadius.zero,
       child: CachedNetworkImage(

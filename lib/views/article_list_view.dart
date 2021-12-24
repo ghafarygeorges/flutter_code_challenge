@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_coding_challenge/viewmodels/article_list_view_model.dart';
 import 'package:flutter_coding_challenge/viewmodels/article_view_model.dart';
 import 'package:flutter_coding_challenge/views/article_details_view.dart';
+import 'package:flutter_coding_challenge/widgets/article_list_view_builder.dart';
 import 'package:flutter_coding_challenge/widgets/list_article_widget.dart';
 import 'package:flutter_coding_challenge/widgets/search_text_field.dart';
 import 'package:http/http.dart' as http;
@@ -32,6 +33,7 @@ class _ArticleListViewState extends State<ArticleListView> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: theme.appBarBgColor,
+        // * here i am switching depeneding on current mode active in the viewmodel between a text title and a search textfield
         title: context.watch<ArticleListViewModel>().searching
             ? SearchTextField(
                 onChanged: (String str) {
@@ -43,6 +45,7 @@ class _ArticleListViewState extends State<ArticleListView> {
                 style: theme.appBarTitleTheme,
               ),
         actions: [
+          // * This is the button used to toggle between normal and search mode
           IconButton(
             onPressed: () => articleListViewModel.toggleSearch(),
             icon: Icon(
@@ -55,44 +58,14 @@ class _ArticleListViewState extends State<ArticleListView> {
           ),
         ],
       ),
+      // * using the loaded proprety from the viewmodel to get notified when the articles are finishing loading to switch from loader to listbuilder
       body: context.watch<ArticleListViewModel>().loaded
-          ? ListView.builder(
-              itemCount: articleListViewModel.searchLength > 0
-                  ? articleListViewModel.filteredArticles.length
-                  : articleListViewModel.articles.length,
-              itemBuilder: (context, index) {
-                List<ArticleViewModel> articles =
-                    articleListViewModel.searchLength > 0
-                        ? articleListViewModel.filteredArticles
-                        : articleListViewModel.articles;
-
-                return Padding(
-                  padding: EdgeInsets.only(
-                    right: 25.w,
-                    top: 25.h,
-                    left: 25.w,
-                    bottom: index == articles.length - 1 ? 25.h : 0,
-                  ),
-                  child: InkWell(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (ctx) => ArticleDetailsView(
-                            articleViewModel: articles[index],
-                          ),
-                        ),
-                      );
-                    },
-                    child: ListArticleWidget(
-                      author: articles[index].author,
-                      publishedDate: articles[index].publishedDate,
-                      thumbnail: articles[index].thumbnail,
-                      title: articles[index].title,
-                    ),
-                  ),
-                );
-              })
+          ? ArticlesListViewBuilder(
+              // * checking the search length to know if i should show the filtered articles or all the articles
+              articles: articleListViewModel.searchLength > 0
+                  ? articleListViewModel.filteredArticles
+                  : articleListViewModel.articles,
+            )
           : theme.circularLoader,
     );
   }

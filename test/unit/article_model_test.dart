@@ -124,6 +124,36 @@ void main() {
       });
     });
 
+    group('testing the abstract proprety', () {
+      test('testing if passed abstract is non existent', () {
+        Map<String, dynamic> json = {};
+        ArticleViewModel article =
+            ArticleViewModel(article: ArticleModel.fromJson(json));
+        expect(article.abstract, "This article has no abstract");
+      });
+
+      test('testing if passed abstract is null', () {
+        Map<String, dynamic> json = {"abstract": null};
+        ArticleViewModel article =
+            ArticleViewModel(article: ArticleModel.fromJson(json));
+        expect(article.abstract, "This article has no abstract");
+      });
+
+      test('testing if passed abstract is not a string', () {
+        Map<String, dynamic> json = {"abstract": true};
+        ArticleViewModel article =
+            ArticleViewModel(article: ArticleModel.fromJson(json));
+        expect(article.abstract, "This article has no abstract");
+      });
+
+      test('testing if passed abstract is a string', () {
+        Map<String, dynamic> json = {"abstract": "This is an abstract"};
+        ArticleViewModel article =
+            ArticleViewModel(article: ArticleModel.fromJson(json));
+        expect(article.abstract, "This is an abstract");
+      });
+    });
+
     group('testing the section proprety', () {
       test('testing if passed section is non existent', () {
         Map<String, dynamic> json = {};

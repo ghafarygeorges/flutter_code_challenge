@@ -19,6 +19,7 @@ class ListArticleWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // * This is the component used in the articles list for better reusability
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
