@@ -66,4 +66,4 @@ Or you could alternatively build an apk for the app using
 ```
 flutter build apk
 ```
-which will create an ```app-release.apk``` that can be found through ```project_folder > build > app > outputs > flutter-apk > app-release.apk'''
+which will create an ```app-release.apk``` that can be found through ```project_folder > build > app > outputs > flutter-apk > app-release.apk```
